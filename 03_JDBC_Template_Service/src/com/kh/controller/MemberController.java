@@ -78,14 +78,14 @@ public class MemberController {
 	}
 	
 	public void selectByUserName(String keyword) {
-		// 결과값을 담을 변수
-		// SELECT -> ResultSet -> ArrayList<Member>
-		ArrayList<Member> list = new MemberDao().selectByUserName(keyword);
+		ArrayList<Member> list =  new MemberDao().selectByUserName(keyword);
+		
 		if(list.isEmpty()) { 
 			// 조회결과가 없을경우 보게될 화면
-			new MemberView().displayNodata(keyword+"대한 조회결과가 없습니다.");
+			new MemberView().displayNodata(keyword+"조회결과가 없습니다.");
 		}
 		else {
+			// 조회결과가 있을경우
 			new MemberView().displayList(list);
 		}
 	}

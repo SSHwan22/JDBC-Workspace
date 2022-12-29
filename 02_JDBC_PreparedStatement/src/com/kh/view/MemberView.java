@@ -141,7 +141,7 @@ public class MemberView {
 	public void deleteMember(){
 		System.out.println("----- 회원탈퇴 -----");
 		
-		System.out.print("탈되할 회원의 ID : ");
+		System.out.println("탈되할 회원의 ID : ");
 		String userId = sc.nextLine();
 		
 		mc.deleteMember(userId);
