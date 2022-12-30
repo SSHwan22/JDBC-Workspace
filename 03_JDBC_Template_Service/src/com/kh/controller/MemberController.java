@@ -3,6 +3,7 @@ package com.kh.controller;
 import java.util.ArrayList;
 
 import com.kh.model.dao.MemberDao;
+import com.kh.model.service.MemberService;
 import com.kh.model.vo.Member;
 import com.kh.view.MemberView;
 
@@ -20,8 +21,8 @@ public class MemberController {
 		// 1. 전달된 데이터들을 Member객체에 담기 => 가공처리
 		Member m = new Member(userId, userPwd, userName, gender, age, email, phone, address, hobby);
 		
-		// 2. Dao의 insertMember 메서드 호출
-		int result = new MemberDao().insertMember(m);
+		// 2. Service의 insertMember 메서드 호출
+		int result = new MemberService().insertMember(m);
 		
 		// 3. result 결과값에 따라서 사용자가 보게될 화면 지정
 		if(result > 0) { // 삽입된 행의 갯수가 1개 이상. -> 성공
@@ -42,8 +43,8 @@ public class MemberController {
 		// SELECT -> ResultSet -> ArrayList<Member>
 		
 		// ArrayList<Member> list = new ArrayList<>();
-		// list = new MemberDao().selectAll();
-		ArrayList<Member> list = new MemberDao().selectAll();
+		// list = new MemberService().selectAll();
+		ArrayList<Member> list = new MemberService().selectAll();
 		
 		// 조회결과가 있는지 없는지 판단 후 사용자가 보게될 view 화면지정.
 		if(list.isEmpty()) { // 텅빈 리스트반환 -> 조회결과가 없다.
@@ -64,7 +65,7 @@ public class MemberController {
 		
 		// 결과값을 담을 변수
 		// SELECT -> ResultSet
-		Member m = new MemberDao().selectByUserId(userId);
+		Member m = new MemberService().selectByUserId(userId);
 		
 		// 조회결과 검색된 데이터가 있는지 없는지 판단 후 사용자가 보게 될 화면 지정
 		if(m ==  null) { 
@@ -78,7 +79,7 @@ public class MemberController {
 	}
 	
 	public void selectByUserName(String keyword) {
-		ArrayList<Member> list =  new MemberDao().selectByUserName(keyword);
+		ArrayList<Member> list =  new MemberService().selectByUserName(keyword);
 		
 		if(list.isEmpty()) { 
 			// 조회결과가 없을경우 보게될 화면
@@ -110,7 +111,7 @@ public class MemberController {
 		m.setAddress(newAddress);
 		
 		// 가공한 VO객체를 Dao단으로 넘기기
-		int result = new MemberDao().updateMember(m);
+		int result = new MemberService().updateMember(m);
 		
 		// 결과에 따른 화면지정
 		if(result > 0) {
@@ -121,7 +122,7 @@ public class MemberController {
 	}
 	
 	public void deleteMember(String userId) {
-		int result = new MemberDao().deleteMember(userId);
+		int result = new MemberService().deleteMember(userId);
 		if(result > 0) {
 			System.out.println("회원 삭제 성공");
 		}else {
